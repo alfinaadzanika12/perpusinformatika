@@ -91,7 +91,7 @@ peminjamanperpustakaan/
    $host = "localhost";
    $user = "root";
    $pass = "";
-   $db   = "nama_database_anda";
+   $db   = "db_perpustakaan1";
 
    $koneksi = mysqli_connect($host, $user, $pass, $db);
    ```
