@@ -1,22 +1,38 @@
-Deskripsi Proyek: Sistem Peminjaman Perpustakaan
+# 📚 Sistem Peminjaman Perpustakaan
 
-Sistem Peminjaman Perpustakaan adalah aplikasi web berbasis PHP dan MySQL yang digunakan untuk mengelola data buku, anggota, serta transaksi peminjaman dan pengembalian secara digital. Aplikasi ini menggantikan pencatatan manual agar proses di perpustakaan lebih cepat, rapi, dan minim kesalahan.
-Fitur Utama
-Autentikasi: login dan logout dengan pemisahan halaman sesuai role.
-Manajemen Anggota: tambah, edit, dan hapus data anggota (Admin).
-Manajemen Buku: tambah, edit, dan hapus data buku beserta foto sampul (Admin).
-Peminjaman Buku: pencatatan transaksi pinjam melalui proses_pinjam.php.
-Pengembalian Buku: pencatatan pengembalian melalui proses_kembali.php, termasuk perhitungan denda keterlambatan.
-Dashboard Per Role: tampilan dan menu yang disesuaikan dengan kebutuhan masing-masing pengguna.
+Aplikasi web berbasis **PHP dan MySQL** untuk mengelola data buku, anggota, serta transaksi peminjaman dan pengembalian secara digital. Sistem ini menggantikan pencatatan manual agar proses di perpustakaan lebih cepat, rapi, dan minim kesalahan.
 
+## ✨ Fitur Utama
+
+- **Autentikasi** — login dan logout dengan pemisahan halaman sesuai role.
+- **Manajemen Anggota** — tambah, edit, dan hapus data anggota (Admin).
+- **Manajemen Buku** — tambah, edit, dan hapus data buku beserta foto sampul (Admin).
+- **Peminjaman Buku** — pencatatan transaksi pinjam.
+- **Pengembalian Buku** — pencatatan pengembalian beserta perhitungan denda keterlambatan otomatis.
+- **Katalog, Rating & Ulasan** — anggota dapat melihat katalog dan memberi ulasan buku.
+- **Dashboard per Role** — tampilan dan menu disesuaikan dengan kebutuhan tiap pengguna.
+
+## 👥 Hak Akses
+
+| Role | Kemampuan |
+|---|---|
+| **Admin** | Mengelola seluruh data master (anggota dan buku) |
+| **Petugas** | Memproses peminjaman dan pengembalian harian |
+| **User (Anggota)** | Melihat katalog, meminjam, memantau status pinjaman, dan melihat denda |
+
+Setiap halaman dilindungi oleh `includes/cek_session.php` yang memeriksa status login dan role sebelum halaman ditampilkan.
+
+## 🗂️ Struktur Proyek
+
+```
 peminjamanperpustakaan/
 │
-├── index.php                  # halaman awal / redirect ke login
+├── index.php                # Halaman awal / redirect ke login
 ├── login.php
 ├── logout.php
-├── koneksi.php                # koneksi database (tetap di root, dipakai semua)
+├── koneksi.php              # Koneksi database (dipakai semua modul)
 │
-├── proses/                    # semua file "proses_*.php"
+├── proses/                  # File pemrosesan (proses_*.php)
 │   ├── proses_login.php
 │   ├── proses_pinjam.php
 │   └── proses_kembali.php
@@ -36,31 +52,61 @@ peminjamanperpustakaan/
 ├── user/
 │   └── dashboard_user.php
 │
-├── includes/                  # bagian yang dipakai berulang
+├── includes/                # Komponen yang dipakai berulang
 │   ├── header.php
 │   ├── footer.php
 │   ├── navbar.php
-│   └── cek_session.php        # cek role & login sebelum akses halaman
+│   └── cek_session.php      # Cek role & login sebelum akses halaman
 │
 ├── assets/
-│   ├── gambar/                # foto buku, anggota, dll
+│   ├── gambar/              # Foto buku, anggota, dll.
 │   ├── video/
 │   │   └── video.mp4
 │   ├── css/
 │   └── js/
 │
 └── config/
-    └── settings.php           # kalau nanti butuh konfigurasi terpisah dari koneksi.php
-    1. Keterangan Akses Pengguna (Role)
-Role	Login lewat	Akses
-Admin	login.php → dashboard_admin.php	Kelola semua data: tambah/edit/hapus anggota, tambah/edit/hapus buku, lihat semua transaksi peminjaman & denda, kelola akun petugas
-Petugas	login.php → dashboard_petugas.php	Proses peminjaman (proses_pinjam.php) & pengembalian (proses_kembali.php), input pembayaran denda, tidak bisa hapus data master (buku/anggota)
-User/Anggota	login.php → dashboard_user.php	Lihat katalog buku, riwayat pinjam sendiri, status denda sendiri, kasih rating & ulasan buku.
-Database
-Koneksi database dikonfigurasi pada file koneksi.php. Tabel utama yang digunakan antara lain:
+    └── settings.php         # Konfigurasi terpisah dari koneksi.php (opsional)
+```
 
-users — akun admin & petugas
-anggota — akun/data siswa
-buku — data koleksi buku
-transaksi — data peminjaman & pengembalian buku
-rating — rating & ulasan buku dari user
+## 🛠️ Teknologi
+
+- **Bahasa:** PHP (mysqli)
+- **Database:** MySQL
+- **Frontend:** HTML, CSS, JavaScript
+- **Server lokal:** XAMPP
+
+## 🚀 Cara Instalasi (Localhost)
+
+1. **Clone repositori** ke folder `htdocs` XAMPP:
+   ```bash
+   cd C:/xampp/htdocs
+   git clone https://github.com/USERNAME/peminjamanperpustakaan.git
+   ```
+2. **Jalankan Apache dan MySQL** melalui XAMPP Control Panel.
+3. **Buat database** baru di phpMyAdmin (`http://localhost/phpmyadmin`), lalu **import** file `.sql` dari repositori ini.
+4. **Sesuaikan koneksi database** di `koneksi.php`:
+   ```php
+   <?php
+   $host = "localhost";
+   $user = "root";
+   $pass = "";
+   $db   = "nama_database_anda";
+
+   $koneksi = mysqli_connect($host, $user, $pass, $db);
+   ```
+5. **Buka aplikasi** di browser:
+   ```
+   http://localhost/peminjamanperpustakaan
+   ```
+
+## 🎯 Tujuan Proyek
+
+- Mempermudah pengelolaan data buku dan anggota.
+- Mempercepat proses peminjaman dan pengembalian.
+- Menghitung denda keterlambatan secara otomatis.
+- Memberikan akses yang aman sesuai peran pengguna.
+
+## 📄 Lisensi
+
+Proyek ini dibuat untuk keperluan pembelajaran. Silakan gunakan dan kembangkan sesuai kebutuhan.
