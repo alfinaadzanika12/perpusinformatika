@@ -1,3 +1,14 @@
+Deskripsi Proyek: Sistem Peminjaman Perpustakaan
+
+Sistem Peminjaman Perpustakaan adalah aplikasi web berbasis PHP dan MySQL yang digunakan untuk mengelola data buku, anggota, serta transaksi peminjaman dan pengembalian secara digital. Aplikasi ini menggantikan pencatatan manual agar proses di perpustakaan lebih cepat, rapi, dan minim kesalahan.
+Fitur Utama
+Autentikasi: login dan logout dengan pemisahan halaman sesuai role.
+Manajemen Anggota: tambah, edit, dan hapus data anggota (Admin).
+Manajemen Buku: tambah, edit, dan hapus data buku beserta foto sampul (Admin).
+Peminjaman Buku: pencatatan transaksi pinjam melalui proses_pinjam.php.
+Pengembalian Buku: pencatatan pengembalian melalui proses_kembali.php, termasuk perhitungan denda keterlambatan.
+Dashboard Per Role: tampilan dan menu yang disesuaikan dengan kebutuhan masing-masing pengguna.
+
 peminjamanperpustakaan/
 │
 ├── index.php                  # halaman awal / redirect ke login
